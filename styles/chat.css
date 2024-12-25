@@ -1,1 +1,44 @@
 
+/* styles/Chat.css */
+
+/* Container for the chat */
+.chat-container {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+/* Message styling */
+.chat-message {
+  max-width: 60%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Message sent by the user (me) */
+.chat-message.me {
+  align-self: flex-end;
+  background-color: #d1ffd6; /* Light green */
+}
+
+/* Message received from others */
+.chat-message.other {
+  align-self: flex-start;
+  background-color: #fff; /* White */
+}
+
+/* Message content styling */
+.message-content {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* Message timestamp styling */
+.message-timestamp {
+  margin: 0;
+  font-size: 0.7em;
+  text-align: right;
+  color: #999;
+}
