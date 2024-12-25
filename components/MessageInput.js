@@ -1,40 +1,54 @@
+import { useState } from 'react';
+import { Input, Button } from '@nextui-org/react';
 
+const MessageInput = () => {
+  const [recipient, setRecipient] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
 
-import React, { useState } from 'react';
+  const handleSendEmail = async () => {
+    const response = await fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ recipient, subject, message }), // Send data to backend
+    });
 
-const MessageInput = ({ onSend }) => {
-  const [message, setMessage] = useState("");
-
-  const handleSend = () => {
-    if (message.trim()) {
-      onSend(message);
-      setMessage("");
+    if (response.ok) {
+      alert('Email sent successfully!');
+    } else {
+      alert('Failed to send email');
     }
   };
 
   return (
-    <div style={{ padding: '10px', borderTop: '1px solid #ccc', display: 'flex' }}>
-      <input
-        type="text"
+    <div className="message-input">
+      <Input
+        clearable
+        underlined
+        label="Recipient"
+        value={recipient}
+        onChange={(e) => setRecipient(e.target.value)}
+        placeholder="Enter recipient's email"
+      />
+      <Input
+        clearable
+        underlined
+        label="Subject"
+        value={subject}
+        onChange={(e) => setSubject(e.target.value)}
+        placeholder="Enter subject"
+      />
+      <Input
+        clearable
+        underlined
+        label="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type a message..."
-        style={{ flex: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+        placeholder="Enter your message"
       />
-      <button
-        onClick={handleSend}
-        style={{
-          marginLeft: '10px',
-          padding: '10px 20px',
-          backgroundColor: '#0070f3',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-        }}
-      >
-        Send
-      </button>
+      <Button auto onClick={handleSendEmail}>Send</Button>
     </div>
   );
 };
