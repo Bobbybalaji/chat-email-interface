@@ -1,9 +1,7 @@
-HEAD
-import Layout from '../components/Layout';
-import '../styles/globals.css';
-import '../styles/globals.css';
-import { AppProps } from 'next/app';
-(commit hash)
+// pages/_app.js
+import '../styles/globals.css';  // Ensure globals.css is imported
+import Layout from '../components/Layout'; // Import Layout component
+import { AppProps } from 'next/app'; // Import AppProps for TypeScript (optional)
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,15 +9,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </Layout>
   );
-}
-
-export default MyApp;
-// pages/_app.js
-import '../styles/globals.css';  // Ensure globals.css is imported
-import { AppProps } from 'next/app';
-
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
 }
 
 export default MyApp;
