@@ -1,20 +1,27 @@
-import { Container, Card, Text, Button } from '@nextui-org/react';
+import Layout from '../components/Layout';
+import Chat from '../components/Chat';
+import MessageInput from '../components/MessageInput';
+import { useState } from 'react';
 
 export default function Home() {
+  const [messages, setMessages] = useState([
+    { sender: 'me', content: 'Hello, John!', timestamp: '10:00 AM' },
+    { sender: 'John Doe', content: 'Hi there!', timestamp: '10:01 AM' },
+  ]);
+
+  const handleSend = (message) => {
+    const newMessage = {
+      sender: 'me',
+      content: message,
+      timestamp: new Date().toLocaleTimeString(),
+    };
+    setMessages((prev) => [...prev, newMessage]);
+  };
+
   return (
-    <Container css={{ padding: '20px' }}>
-      <Card hoverable clickable css={{ mw: '400px' }}>
-        <Card.Header>
-          <Text h4>Email Conversation</Text>
-        </Card.Header>
-        <Card.Body>
-          <Text>Here's your chat-style email interface.</Text>
-        </Card.Body>
-        <Card.Footer>
-          <Button color="primary">Send Email</Button>
-        </Card.Footer>
-      </Card>
-    </Container>
+    <Layout>
+      <Chat messages={messages} />
+      <MessageInput onSend={handleSend} />
+    </Layout>
   );
 }
-
